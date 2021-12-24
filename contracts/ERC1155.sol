@@ -90,7 +90,7 @@ contract ERC1155 is CommonConstants {
     require(_from == msg.sender || operatorApproval[_from][msg.sender] == true, "Need operator approval for 3rd party transfers.");
 
     balances[_id][_from] = balances[_id][_from].sub(_value);
-    balances[_id][_to] = balances[_id][_from].add(_value);
+    balances[_id][_to] = balances[_id][_to].add(_value);
 
     emit TransferSingle(msg.sender, _from, _to, _id, _value);
 
