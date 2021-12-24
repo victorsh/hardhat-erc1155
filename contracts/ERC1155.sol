@@ -54,6 +54,8 @@ contract ERC1155 is CommonConstants {
   // owner => (operator => approved)
   mapping (address => mapping(address => bool)) internal operatorApproval;
 
+/////////////////////////////////////////// ERC165 //////////////////////////////////////////////
+
   /*
     bytes4(keccak256('supportsInterface(bytes4)'));
   */
@@ -69,14 +71,19 @@ contract ERC1155 is CommonConstants {
   */
   bytes4 constant private INTERFACE_SIGNATURE_ERC1155 = 0xd9b67a26;
 
+  bytes4 constant private INTERFACE_SIGNATURE_URI = 0x0e89341c;
+
   function supportsInterface(bytes4 _interfaceId) public pure returns (bool) {
     if (_interfaceId == INTERFACE_SIGNATURE_ERC165 ||
-        _interfaceId == INTERFACE_SIGNATURE_ERC1155) {
+        _interfaceId == INTERFACE_SIGNATURE_ERC1155 ||
+        _interfaceId == INTERFACE_SIGNATURE_URI) {
       return true;
     }
 
     return false;
   }
+
+/////////////////////////////////////////// ERC165 //////////////////////////////////////////////
   
   function safeTransferFrom(address _from, address _to, uint256 _id, uint256 _value, bytes calldata _data) external {
     require(_to != address(0x0), "_to must be non-zero");
